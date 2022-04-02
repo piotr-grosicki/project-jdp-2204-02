@@ -1,9 +1,14 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.GenericEntity;
+import com.kodilla.ecommercee.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,21 +19,20 @@ public class ProductController {
 
 
     @GetMapping
-    public List<GenericEntity> getAllProducts(){
-        return Arrays.asList(new GenericEntity("Product 1"),
-                new GenericEntity("Product 2"));
+    public List<ProductDto> getAllProducts(){
+        return new ArrayList<>();
     }
 
-    @GetMapping(path = "{productId}")
-    public GenericEntity getProductById(@PathVariable int productId){
-        return new GenericEntity("Product");
+    @GetMapping(value = "{productId}")
+    public ProductDto getProductById(@PathVariable int productId){
+        return new ProductDto();
     }
-    @PostMapping
-    public GenericEntity addNewProduct(){
-        return new GenericEntity("New");
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ProductDto addNewProduct(@RequestBody ProductDto productDto){
+        return new ProductDto();
     }
-    @PutMapping(path = "{productId}")
-    public void updateProduct(@PathVariable int productId){
+    @PutMapping
+    public void updateProduct(@RequestBody ProductDto productDto){
 
     }
     @DeleteMapping(path = "{productId}")
