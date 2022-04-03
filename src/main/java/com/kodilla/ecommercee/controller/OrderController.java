@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.GenericEntity;
+import com.kodilla.ecommercee.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,22 +13,22 @@ import java.util.List;
 public class OrderController {
 
     @GetMapping
-    public List<GenericEntity> getOrders() {
+    public List<OrderDto> getOrders() {
         return new ArrayList<>();
     }
 
     @GetMapping(value = "{orderId}")
-    public GenericEntity getOrder(Long orderId) {
-        return new GenericEntity();
+    public OrderDto getOrder(Long orderId) {
+        return new OrderDto();
     }
 
     @GetMapping(value = "/user/{userId}")
-    public List<GenericEntity> getUserOrders(Long userId) {
+    public List<OrderDto> getUserOrders(Long userId) {
         return new ArrayList<>();
     }
 
     @PostMapping
-    public void createOrder(GenericEntity genericEntity) {
+    public void createOrder(OrderDto orderDto) {
     }
 
     @DeleteMapping(value = "{orderId}")
