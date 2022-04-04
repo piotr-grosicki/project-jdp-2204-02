@@ -1,15 +1,11 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.GenericEntity;
 import com.kodilla.ecommercee.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
