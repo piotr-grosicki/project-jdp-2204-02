@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/order")
+@RequestMapping("/v1/group")
 @RequiredArgsConstructor
 public class GroupController {
 
