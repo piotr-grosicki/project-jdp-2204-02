@@ -20,7 +20,7 @@ public class Group {
     @NotNull
     @GeneratedValue
     @Column(name = "GROUP_ID")
-    private Long groupID;
+    private Long groupId;
 //TODO: odkomentować po złączeniu z encją Product
 //    @OneToMany(
 //            targetEntity = Product.class,

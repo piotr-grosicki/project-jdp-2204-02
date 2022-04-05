@@ -13,9 +13,9 @@ import java.util.Optional;
 public interface GroupRepository extends JpaRepository<Group, Long> {
 
     List<Group> findAll();
-    Optional<Group> findByGroupId(Long id);
+    Optional<Group> findByGroupId(Long groupId);
     Group save(Group group);
-    void deleteByGroupId(Long id);
+    void deleteByGroupId(Long groupId);
 
 
 
