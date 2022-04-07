@@ -24,8 +24,7 @@ public class ProductController {
         return new ProductDto();
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ProductDto addNewProduct(@RequestBody ProductDto productDto){
-        return new ProductDto();
+    public void addNewProduct(@RequestBody ProductDto productDto){
     }
     @PutMapping
     public void updateProduct(@RequestBody ProductDto productDto){
