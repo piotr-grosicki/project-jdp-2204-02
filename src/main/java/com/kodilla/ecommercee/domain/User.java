@@ -12,19 +12,24 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Getter
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    private Long id;
 
-    /*
+    @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name="USER_ID")
+    private Long userId;
+
+    /* Połączenie z encją Order
     @OneToMany(
             targetEntity = Order.class,
-            mappedBy = "orderList",
+            mappedBy = "orderId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @Column(name = "KEY_ID")
+    private Long keyId;
 */
+
     @NotNull
     @Column(name = "USER_NAME")
     private String userName;
