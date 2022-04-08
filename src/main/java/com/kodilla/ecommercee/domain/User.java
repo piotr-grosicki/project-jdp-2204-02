@@ -18,17 +18,19 @@ public class User {
     @NotNull
     @Column(name="USER_ID")
     private Long userId;
-
     /* Połączenie z encją Order
     @OneToMany(
             targetEntity = Order.class,
-            mappedBy = "orderId",
+            mappedBy="orderId"
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    private List<Order> orders;
+    */
+
+    @NotNull
     @Column(name = "KEY_ID")
     private Long keyId;
-*/
 
     @NotNull
     @Column(name = "USER_NAME")
