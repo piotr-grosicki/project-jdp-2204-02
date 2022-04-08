@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "CARTS")
@@ -28,4 +29,7 @@ public class Cart {
     @NotNull
     @Column(name = "CART_PRICE")
     private double cart_price;
+
+   // @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
+  //  private List<Product>products;
 }
