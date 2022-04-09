@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto addUser(@RequestBody UserDto userDto) {
-        return new UserDto();
+    public void addUser(@RequestBody UserDto userDto) {
     }
 
     @PutMapping(value = "block_user/{userId}")
@@ -22,7 +21,5 @@ public class UserController {
 
     @PutMapping(value="createKey/{userId}")
     public void createKey(@PathVariable int userId){
-
     }
-
 }
