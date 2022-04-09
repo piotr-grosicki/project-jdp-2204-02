@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,11 +23,9 @@ public class Cart {
     @OneToOne
     private Order order;
 
-/*
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
-*/
 
     @Column(name = "CART_PRICE")
     private double cart_price;

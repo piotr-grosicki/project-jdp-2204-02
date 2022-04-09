@@ -20,10 +20,8 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long orderId;
 
-    //TODO: odkomentowac po powstaniu encji User
-    //@OneToMany(mappedBy = "id")
-    //private User userId;
-
+    @ManyToOne
+    private User user;
 
     @OneToOne(mappedBy = "order")
     @JoinColumn(name = "CART_ID")
