@@ -17,7 +17,6 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "ORDER_ID")
     private Long orderId;
 
@@ -25,9 +24,10 @@ public class Order {
     //@OneToMany(mappedBy = "id")
     //private User userId;
 
-    //TODO: odkomentowac po powstaniu encji Cart
-    //@OneToOne(mappedBy = "id")
-    //private Cart cartId;
+
+    @OneToOne(mappedBy = "order")
+    @JoinColumn(name = "CART_ID")
+    private Cart cart;
 
     @NotNull
     @Column(name = "ADDRESS")
