@@ -180,5 +180,9 @@ public class ProductRepositoryTest {
 
         //Then
         assertEquals(1, cart.getProducts().size());
+
+        //Clean up
+        cartRepository.deleteAll();
+        productRepository.deleteAll();
     }
 }
