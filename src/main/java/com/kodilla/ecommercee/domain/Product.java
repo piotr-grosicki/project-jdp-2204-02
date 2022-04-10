@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -17,13 +18,12 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "PRODUCT_ID")
     private Long productId;
 
-    //TODO: odkomentowac po powstaniu encji ProductGroup
-   // @OneToMany(mappedBy = "id")
-    //private Set<ProductGroup> productGroupId;
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
 
     @NotNull
     @Column(name = "PRODUCT_NAME")
@@ -37,12 +37,30 @@ public class Product {
     @Column(name = "DESCRIPTION")
     private String productDescription;
 
-    //TODO: odkomentowac po powstaniu encji Cart
-   // @ManyToMany(cascade = CascadeType.MERGE)
-    //@JoinTable(name = "cartProducts",
-      //           joinColumns = @JoinColumn(name = "PRODUCTS_ID"),
-        //         inverseJoinColumns = @JoinColumn(name = "cart_id"))
-    //private List<Cart> carts;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "cartProducts",
+            joinColumns = @JoinColumn(name = "PRODUCTS_ID"),
+            inverseJoinColumns = @JoinColumn(name = "cart_id"))
+    private List<Cart> carts;
 
+    public Product(Group group, String productName, BigDecimal productPrice, String productDescription) {
+        this.group = group;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productDescription = productDescription;
+    }
+
+    public Product(Long productId, String productName, BigDecimal productPrice, String productDescription) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productDescription = productDescription;
+    }
+
+    public Product(String productName, BigDecimal productPrice, String productDescription) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productDescription = productDescription;
+    }
 }
 
