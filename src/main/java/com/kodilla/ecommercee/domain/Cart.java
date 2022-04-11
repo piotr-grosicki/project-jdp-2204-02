@@ -27,13 +27,7 @@ public class Cart {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @Column(name = "CART_PRICE")
-    private double cart_price;
-
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private List<Product>products = new ArrayList<>();
 
-    public Cart(double cart_price) {
-        this.cart_price = cart_price;
-    }
 }

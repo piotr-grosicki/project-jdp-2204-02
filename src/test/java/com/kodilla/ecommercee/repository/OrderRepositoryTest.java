@@ -96,7 +96,7 @@ public class OrderRepositoryTest {
     public void findUserForOrder(){
         //Given
         User testUser = new User("testUserName", "testUserSurname");
-        Cart testcart = new Cart(30.0);
+        Cart testcart = new Cart();
         Order testOrder = new Order(testUser, testcart, "testAddress", LocalDate.now());
 
         //When
@@ -117,7 +117,7 @@ public class OrderRepositoryTest {
     public void deleteOrderById(){
         //Given
         User testUser = new User("testUserName", "testUserSurname");
-        Cart testcart = new Cart(30.0);
+        Cart testcart = new Cart();
         Order testOrder = new Order(testUser, testcart, "testAddress", LocalDate.now());
 
         //When
@@ -144,7 +144,7 @@ public class OrderRepositoryTest {
     public void findCartForOrder(){
         //Given
         User testUser = new User("testUserName", "testUserSurname");
-        Cart testcart = new Cart(30.0);
+        Cart testcart = new Cart();
         Order testOrder = new Order(testUser, testcart, "testAddress", LocalDate.now());
 
         //When
