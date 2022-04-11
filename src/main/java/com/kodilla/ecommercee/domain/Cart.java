@@ -32,4 +32,8 @@ public class Cart {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private List<Product>products = new ArrayList<>();
+
+    public Cart(double cart_price) {
+        this.cart_price = cart_price;
+    }
 }

@@ -34,4 +34,22 @@ public class Order {
     @NotNull
     @Column(name = "DATE_CREATED")
     private LocalDate created;
+
+    public Order(String address, LocalDate created) {
+        this.address = address;
+        this.created = created;
+    }
+
+    public Order(User user, String address, LocalDate created) {
+        this.user = user;
+        this.address = address;
+        this.created = created;
+    }
+
+    public Order(User user, Cart cart, String address, LocalDate created) {
+        this.user = user;
+        this.cart = cart;
+        this.address = address;
+        this.created = created;
+    }
 }
