@@ -17,18 +17,17 @@ import java.util.List;
 public class Group {
 
     @Id
-    @NotNull
     @GeneratedValue
     @Column(name = "GROUP_ID")
     private Long groupId;
-//TODO: odkomentować po złączeniu z encją Product
-//    @OneToMany(
-//            targetEntity = Product.class,
-//            mappedBy = "productId",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY
-//    )
-//    private List<Product> products;
+
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "group",
+            cascade = CascadeType.MERGE,
+            fetch = FetchType.EAGER
+    )
+    private List<Product> products = new ArrayList<>();
 
     @NotNull
     @Column(name = "GROUP_NAME")
@@ -38,5 +37,8 @@ public class Group {
     @Column(name = "GROUP_DESCRIPTION")
     private String groupDescription;
 
-
+    public Group(String groupName, String groupDescription) {
+        this.groupName = groupName;
+        this.groupDescription = groupDescription;
+    }
 }
