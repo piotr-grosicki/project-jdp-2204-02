@@ -41,12 +41,19 @@ public class Product {
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "cartProducts",
-                 joinColumns = @JoinColumn(name = "PRODUCTS_ID"),
-                 inverseJoinColumns = @JoinColumn(name = "cart_id"))
+               joinColumns = @JoinColumn(name = "PRODUCTS_ID"),
+               inverseJoinColumns = @JoinColumn(name = "cart_id"))
     private List<Cart> carts;
 
     public Product(Group group, String productName, BigDecimal productPrice, String productDescription) {
         this.group = group;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productDescription = productDescription;
+    }
+
+    public Product(Long productId, String productName, BigDecimal productPrice, String productDescription) {
+        this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productDescription = productDescription;
