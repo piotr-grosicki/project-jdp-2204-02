@@ -10,17 +10,7 @@ import java.util.Optional;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long>
 {
-
-    @Override
     List<Group> findAll();
-
-    @Override
     Optional<Group> findById(Long id);
-
-    @Override
     void deleteById(Long id);
-
-    void deleteByName(String name);
-
-    Optional<Group> findByName(String name);
 }

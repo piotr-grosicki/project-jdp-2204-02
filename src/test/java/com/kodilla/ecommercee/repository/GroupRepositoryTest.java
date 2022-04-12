@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.repository;
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,12 @@ public class GroupRepositoryTest {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @BeforeEach
+    void init() {
+        repository.deleteAll();
+        productRepository.deleteAll();
+    }
 
     @Test
     public void testFindAll(){
@@ -81,8 +88,8 @@ public class GroupRepositoryTest {
     @Test
     public void testDeleteByGroupId(){
         //given
-        Group g1 = new Group(1L,"Desc");
-        Group g2 = new Group(2L,"Desc2");
+        Group g1 = new Group("Desc");
+        Group g2 = new Group("Desc2");
         repository.save(g1);
         repository.save(g2);
         //when

@@ -31,9 +31,13 @@ public class GroupController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createGroup(@RequestBody GroupDto groupDto) {
+    public GroupDto createGroup(@RequestBody GroupDto groupDto) {
         Group group = mapper.mapToGroup(groupDto);
-        service.saveGroup(group);
+        Group saved = service.saveGroup(group);
+
+        // Return version of group saved to the DB.
+        // Avoid unnecessary HTTP GET request for added group details
+        return mapper.mapToGroupDto(saved);
     }
 
     @PutMapping
