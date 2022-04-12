@@ -3,6 +3,8 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -12,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class User {
 
     @Id
-    @GeneratedValue
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="USER_ID")
     private Long userId;
 
@@ -39,4 +41,8 @@ public class User {
     @Column(name = "USER_SURNAME")
     private String userSurname;
 
+    public User(String userName, String userSurname) {
+        this.userName = userName;
+        this.userSurname = userSurname;
+    }
 }
