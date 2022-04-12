@@ -9,36 +9,35 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "`GROUPS`")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "\"GROUPS\"")
 public class Group {
+
+    public Group(String name) {
+        this.name = name;
+    }
+
+    public Group(Long id, @NotNull String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Id
     @GeneratedValue
-    @Column(name = "GROUP_ID")
-    private Long groupId;
+    @NotNull
+    @Column(name = "GROUP_ID", unique = true)
+    private Long id;
+
+    @Column(name = "NAME")
+    private String name;
 
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "group",
-            cascade = CascadeType.MERGE,
-            fetch = FetchType.EAGER
+            cascade = {CascadeType.ALL},
+            fetch = FetchType.LAZY
     )
     private List<Product> products = new ArrayList<>();
-
-    @NotNull
-    @Column(name = "GROUP_NAME")
-    private String groupName;
-
-    @NotNull
-    @Column(name = "GROUP_DESCRIPTION")
-    private String groupDescription;
-
-    public Group(String groupName, String groupDescription) {
-        this.groupName = groupName;
-        this.groupDescription = groupDescription;
-    }
 }
