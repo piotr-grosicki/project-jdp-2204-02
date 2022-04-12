@@ -28,11 +28,11 @@ public class GroupController {
     }
 
     @PutMapping(value = "updateGroup")
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        return new GroupDto();
+    public void updateGroup(@RequestBody GroupDto groupDto) {
+
     }
 
-    @DeleteMapping("deleteGroup")
-    public void deleteGroup(@RequestParam Long id) {
+    @DeleteMapping(value = "{id}")
+    public void deleteGroup(@PathVariable Long id) {
     }
 }
