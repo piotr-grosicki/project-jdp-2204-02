@@ -1,19 +1,16 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.Exeptions.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.DbProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("v1/products")
@@ -31,7 +28,8 @@ public class ProductController {
     }
 
     @GetMapping(value = "{productId}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId) throws ProductNotFoundException {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId) throws ProductNotFoundException
+    {
         return ResponseEntity.ok(productMapper.mapToProductDto(service.getProductWithId(productId)));
     }
 
