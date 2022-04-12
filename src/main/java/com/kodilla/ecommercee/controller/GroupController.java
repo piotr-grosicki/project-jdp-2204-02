@@ -18,16 +18,16 @@ public class GroupController {
         return new ArrayList<>();
     }
 
-    @GetMapping(value = "/getGroup/{id}")
-    public GroupDto getGroup(@PathVariable Long id) {
-        return new GroupDto();
+    @GetMapping(value = "{id}")
+    public void getGroup(@PathVariable Long id) {
+
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createGroup(@RequestBody GroupDto groupDto) {
     }
 
-    @PutMapping(value = "updateGroup")
+    @PutMapping
     public void updateGroup(@RequestBody GroupDto groupDto) {
 
     }
