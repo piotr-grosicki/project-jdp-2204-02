@@ -31,7 +31,7 @@ public class UserRepositoryTest {
 
         //When
         userRepository.save(user);
-        Long id= user.getId();
+        Long id= user.getUserId();
         Optional<User> readUser= userRepository.findById(id);
 
         //Then
@@ -49,7 +49,7 @@ public class UserRepositoryTest {
 
         //When
         userRepository.save(user1);
-        Long id= user1.getId();
+        Long id= user1.getUserId();
 
         //Then
         assertEquals(1,userRepository.findAll().size());
@@ -66,8 +66,8 @@ public class UserRepositoryTest {
         User user2= new User ("Name2", "Surname2");
         userRepository.save(user1);
         userRepository.save(user2);
-        Long id1= user1.getId();
-        Long id2= user2.getId();
+        Long id1= user1.getUserId();
+        Long id2= user2.getUserId();
 
         //When
         userRepository.deleteById(id1);
@@ -78,12 +78,13 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void testUserExistWhenOrderDelete(){
+    public void testUserExistWhenOrderDelete()
+    {
 
         //Given
-        User user1= new User("Name", "Surname");
-        User user2= new User ("Name2", "Surname2");
-        Order order= new Order("testAddress", LocalDate.now());
+        User user1 = new User("Name", "Surname");
+        User user2 = new User("Name2", "Surname2");
+        Order order = new Order("testAddress", LocalDate.now());
 
         //When
         userRepository.save(user1);
@@ -93,8 +94,8 @@ public class UserRepositoryTest {
 
         orderRepository.deleteAll();
 
-        Long id1= user1.getId();
-        Long id2= user2.getId();
+        Long id1 = user1.getUserId();
+        Long id2 = user2.getUserId();
 
 
         //Then
@@ -103,16 +104,17 @@ public class UserRepositoryTest {
         //Clean up
         userRepository.deleteById(id1);
         userRepository.deleteById(id2);
+    }
 
     @Test
-    public void testUserBlocked(){
+    public void testUserBlocked() {
 
         //Given
-        User user1= new User("Mary", "Cold");
-        User user2= new User("John", "Biden");
-        User user3= new User("Katy", "Melua");
-        User user4= new User("King", "Broo");
-        User user5= new User("Wally", "Tomato");
+        User user1 = new User("Mary", "Cold");
+        User user2 = new User("John", "Biden");
+        User user3 = new User("Katy", "Melua");
+        User user4 = new User("King", "Broo");
+        User user5 = new User("Wally", "Tomato");
 
         //When
         user1.setUserBlocked(true);

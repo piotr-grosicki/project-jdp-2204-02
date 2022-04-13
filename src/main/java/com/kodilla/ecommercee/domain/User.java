@@ -10,40 +10,17 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "USERS")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "USERS")
+@Getter
+@Setter
 public class User {
 
-    public User(String userName, String userSurname) {
-        this.userName = userName;
-        this.userSurname = userSurname;
-    }
-
-    public User(Long id, String userName, String userSurname) {
-        this.id = id;
-        this.userName = userName;
-        this.userSurname = userSurname;
-    }
-
     @Id
-    @GeneratedValue
-    @NotNull
-    @Column(name = "USER_ID", unique = true)
-    private Long id;
-
-    @NotNull
-    @Column(name = "USER_NAME")
-    private String userName;
-
-    @NotNull
-    @Column(name = "USER_SURNAME")
-    private String userSurname;
-
-    @Column(name = "KEY_ID")
-    private String keyId;
+    @GeneratedValue/*(strategy = GenerationType.IDENTITY)*/
+    @Column(name="USER_ID")
+    private Long userId;
 
     @OneToMany(
             targetEntity = Order.class,
@@ -53,4 +30,37 @@ public class User {
     )
     private List<Order> orders;
 
+    @Column(name = "KEY_ID")
+    private String keyId;
+
+    @NotNull
+    @Column(name = "USER_NAME")
+    private String userName;
+
+    @NotNull
+    @Column(name = "USER_SURNAME")
+    private String userSurname;
+
+    @NotNull
+    @Column(name="USER_BLOCKED")
+    private Boolean userBlocked=Boolean.FALSE;
+
+    public void setUserBlocked(Boolean userBlocked) {
+        this.userBlocked = userBlocked;
+    }
+
+    public void setKeyId(String keyId) {
+        this.keyId = keyId;
+    }
+
+    public User(Long userId, String userName, String userSurname) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userSurname = userSurname;
+    }
+
+    public User(String userName, String userSurname) {
+        this.userName = userName;
+        this.userSurname = userSurname;
+    }
 }

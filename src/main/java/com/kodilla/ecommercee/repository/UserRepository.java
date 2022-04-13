@@ -11,11 +11,10 @@ import java.util.Optional;
 @Transactional
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-  
+
     User save(User user);
     List<User> findAll();
-    Optional<User> findById(Long userId);
-    User save(User user);
-    void deleteById(Long userId);
-
+    Optional<User> findByUserId(Long userId);
+    void deleteByUserId(Long userId);
+    List<User>findByUserBlocked(Boolean blocked);
 }

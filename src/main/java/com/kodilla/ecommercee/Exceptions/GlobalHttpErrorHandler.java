@@ -1,5 +1,7 @@
 package com.kodilla.ecommercee.Exceptions;
 
+import com.kodilla.ecommercee.Exeptions.UserNotFoundException;
+import com.kodilla.ecommercee.Exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,4 +21,3 @@ class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>("User with given id doesn't exist", HttpStatus.BAD_REQUEST);
     }
 }
-
