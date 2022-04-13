@@ -28,6 +28,20 @@ public class UserController {
         return ResponseEntity.ok(userMapper.mapToUserDtoList(users));
     }
 
+    @GetMapping(value = "/active_users")
+    public ResponseEntity<List<UserDto>> getAllActiveUsers(){
+        Boolean blocked = false;
+        List<User> activeUsers= service.getAllBlockedUsers(blocked);
+        return ResponseEntity.ok(userMapper.mapToUserDtoList(activeUsers));
+    }
+
+    @GetMapping(value = "/blocked_users")
+    public ResponseEntity<List<UserDto>> getAllBlockedUsers(){
+        Boolean blocked=true;
+        List<User> blockedUsers= service.getAllBlockedUsers(blocked);
+        return ResponseEntity.ok(userMapper.mapToUserDtoList(blockedUsers));
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addUser(@RequestBody UserDto userDto) {
         User user= userMapper.mapToUser(userDto);

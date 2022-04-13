@@ -26,4 +26,7 @@ public class DbUserService {
 
     public void deleteUser(final Long userId){
         repository.deleteByUserId(userId);}
+
+    public List<User> getAllBlockedUsers(final Boolean blocked){
+        return repository.findByUserBlocked(blocked);}
 }

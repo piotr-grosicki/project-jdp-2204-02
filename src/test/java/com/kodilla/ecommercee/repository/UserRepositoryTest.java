@@ -102,6 +102,33 @@ public class UserRepositoryTest {
         userRepository.deleteByUserId(id1);
         userRepository.deleteByUserId(id2);
         orderRepository.deleteByOrderId(id3);
+    }
 
+    @Test
+    public void testUserBlocked(){
+
+        //Given
+        User user1= new User("Mary", "Cold");
+        User user2= new User("John", "Biden");
+        User user3= new User("Katy", "Melua");
+        User user4= new User("King", "Broo");
+        User user5= new User("Wally", "Tomato");
+
+        //When
+        user1.setUserBlocked(true);
+        user2.setUserBlocked(true);
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+        userRepository.save(user4);
+        userRepository.save(user5);
+
+        //Then
+        assertEquals(2, userRepository.findByUserBlocked(true).size());
+        assertEquals(3, userRepository.findByUserBlocked(false).size());
+        assertEquals(5, userRepository.findAll().size());
+
+        //Clean up
+        userRepository.deleteAll();
     }
 }
