@@ -19,7 +19,7 @@ public class Group {
         this.name = name;
     }
 
-    public Group(Long id, @NotNull String name) {
+    public Group(@NotNull Long id, @NotNull String name) {
         this.id = id;
         this.name = name;
     }
