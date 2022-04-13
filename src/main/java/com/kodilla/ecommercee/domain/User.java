@@ -17,13 +17,15 @@ import java.util.List;
 @Table(name = "USERS")
 public class User {
 
-    public User(String userName) {
+    public User(String userName, String userSurname) {
         this.userName = userName;
+        this.userSurname = userSurname;
     }
 
-    public User(Long id, String userName) {
+    public User(Long id, String userName, String userSurname) {
         this.id = id;
         this.userName = userName;
+        this.userSurname = userSurname;
     }
 
     @Id
@@ -32,9 +34,11 @@ public class User {
     @Column(name = "USER_ID", unique = true)
     private Long id;
 
+    @NotNull
     @Column(name = "USER_NAME")
     private String userName;
 
+    @NotNull
     @Column(name = "USER_SURNAME")
     private String userSurname;
 

@@ -72,7 +72,7 @@ public class OrderRepositoryTest {
     @Test
     public void findOrdersByUser(){
         //Given
-        User testUser = new User("Name");
+        User testUser = new User("Name", "Surname");
 
         Order testOrder = new Order(testUser, "address", LocalDate.now());
         Order testOrder2 = new Order(testUser, "address", LocalDate.now());
@@ -99,7 +99,7 @@ public class OrderRepositoryTest {
     @Test
     public void findUserForOrder(){
         //Given
-        User testUser = new User("User");
+        User testUser = new User("Name", "Surname");
         Cart testCart = new Cart();
         Order testOrder = new Order(testUser, testCart, "address", LocalDate.now());
 
@@ -120,7 +120,7 @@ public class OrderRepositoryTest {
     @Test
     public void deleteOrderById(){
         //Given
-        User testUser = new User("User");
+        User testUser = new User("Name", "Surname");
         Cart testCart = new Cart();
         Order testOrder = new Order(testUser, testCart, "address", LocalDate.now());
 
@@ -147,7 +147,7 @@ public class OrderRepositoryTest {
     @Test
     public void findCartForOrder(){
         //Given
-        User testUser = new User("User");
+        User testUser = new User("Name", "Surname");
         Cart testCart = new Cart();
         Order testOrder = new Order(testUser, testCart, "address", LocalDate.now());
 

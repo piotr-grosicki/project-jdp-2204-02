@@ -27,7 +27,7 @@ public class UserRepositoryTest {
     public void testUserSave(){
 
         //Given
-        User user = new User("User");
+        User user = new User("Name", "Surname");
 
         //When
         userRepository.save(user);
@@ -45,7 +45,7 @@ public class UserRepositoryTest {
     public void testAddNewUser() {
 
         //Given
-        User user1= new User("User");
+        User user1= new User("Name", "Surname");
 
         //When
         userRepository.save(user1);
@@ -62,8 +62,8 @@ public class UserRepositoryTest {
     public void testDeleteByUserId() {
 
         //Given
-        User user1= new User("User");
-        User user2= new User ("User2");
+        User user1= new User("Name", "Surname");
+        User user2= new User ("Name2", "Surname2");
         userRepository.save(user1);
         userRepository.save(user2);
         Long id1= user1.getId();
@@ -81,8 +81,8 @@ public class UserRepositoryTest {
     public void testUserExistWhenOrderDelete(){
 
         //Given
-        User user1= new User("User");
-        User user2= new User ("User2");
+        User user1= new User("Name", "Surname");
+        User user2= new User ("Name2", "Surname2");
         Order order= new Order("testAddress", LocalDate.now());
 
         //When
