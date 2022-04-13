@@ -21,7 +21,7 @@ public class User {
         this.userName = userName;
     }
 
-    public User(Long id, @NotNull String userName) {
+    public User(Long id, String userName) {
         this.id = id;
         this.userName = userName;
     }

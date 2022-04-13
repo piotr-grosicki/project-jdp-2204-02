@@ -20,21 +20,14 @@ public class Order {
         this.created = now;
     }
 
-    public Order(Long id, @NotNull String address, @NotNull LocalDate now) {
-        this.id = id;
-        this.address = address;
-        this.created = now;
-    }
 
-    public Order(User user, @NotNull String address, @NotNull LocalDate now) {
-        this.id = id;
+    public Order(User user, String address, LocalDate now) {
         this.user = user;
         this.address = address;
         this.created = now;
     }
 
-    public Order(User user, Cart cart, @NotNull String address, @NotNull LocalDate now) {
-        this.id = id;
+    public Order(User user, Cart cart, String address, LocalDate now) {
         this.user = user;
         this.cart = cart;
         this.address = address;
