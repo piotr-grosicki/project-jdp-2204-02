@@ -18,7 +18,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue/*(strategy = GenerationType.IDENTITY)*/
     @Column(name="USER_ID")
     private Long userId;
 
@@ -40,6 +40,24 @@ public class User {
     @NotNull
     @Column(name = "USER_SURNAME")
     private String userSurname;
+
+    @NotNull
+    @Column(name="USER_BLOCKED")
+    private Boolean userBlocked=Boolean.FALSE;
+
+    public void setUserBlocked(Boolean userBlocked) {
+        this.userBlocked = userBlocked;
+    }
+
+    public void setKeyId(String keyId) {
+        this.keyId = keyId;
+    }
+
+    public User(Long userId, String userName, String userSurname) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userSurname = userSurname;
+    }
 
     public User(String userName, String userSurname) {
         this.userName = userName;
