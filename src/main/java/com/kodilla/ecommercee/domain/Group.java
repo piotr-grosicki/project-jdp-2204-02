@@ -15,13 +15,15 @@ import java.util.List;
 @Table(name = "\"GROUPS\"")
 public class Group {
 
-    public Group(String name) {
+    public Group(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
-    public Group(Long id, String name) {
+    public Group(Long id, String name, String description) {
         this.id = id;
         this.name = name;
+        this.description = description;
     }
 
     @Id
@@ -30,8 +32,13 @@ public class Group {
     @Column(name = "GROUP_ID", unique = true)
     private Long id;
 
+    @NotNull
     @Column(name = "NAME")
     private String name;
+
+    @NotNull
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @OneToMany(
             targetEntity = Product.class,

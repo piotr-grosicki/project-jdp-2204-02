@@ -62,7 +62,7 @@ public class ProductRepositoryTest {
     @Test
     public void addNewProductWithGroup() {
         //Given
-        Group group = new Group("Desc1");
+        Group group = new Group("Name", "Desc");
 
         Product product1 = new Product(group, "Product1", new BigDecimal(100), "Desc1");
         Product product2 = new Product(group, "Product2", new BigDecimal(100), "Desc2");
@@ -85,8 +85,8 @@ public class ProductRepositoryTest {
     @Test
     public void getProductListByGroupName() {
         //Given
-        Group group = new Group( "Desc1");
-        Group group2 = new Group( "Desc2");
+        Group group = new Group("Name", "Desc");
+        Group group2 = new Group("Name2", "Desc2");
 
         Product product1 = new Product(group, "Product1", new BigDecimal(100), "Desc1");
         Product product2 = new Product(group, "Product2", new BigDecimal(100), "Desc2");
@@ -114,7 +114,7 @@ public class ProductRepositoryTest {
     @Test
     public void addProductToGroup() {
         //Given
-        Group group = new Group("Desc1");
+        Group group = new Group("Name", "Desc");
         Product product1 = new Product("Product1", new BigDecimal(100), "Desc1");
 
         //When
@@ -138,7 +138,7 @@ public class ProductRepositoryTest {
     @Test
     public void deleteProductById() {
         //Given
-        Group group = new Group("Desc1");
+        Group group = new Group("Name", "Desc");
         Product product = new Product("Product1", new BigDecimal(100), "Desc1");
 
         groupRepository.save(group);
@@ -155,7 +155,7 @@ public class ProductRepositoryTest {
     @Test
     public void deleteProductByIdFromGroup() {
         //Given
-        Group group = new Group("Desc1");
+        Group group = new Group("Name", "Desc");
         Product product = new Product(group,"Product1", new BigDecimal(100), "Desc1");
 
         groupRepository.save(group);
