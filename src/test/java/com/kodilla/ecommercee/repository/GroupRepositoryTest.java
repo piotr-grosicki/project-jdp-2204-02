@@ -39,8 +39,6 @@ public class GroupRepositoryTest {
     public void testFindAll(){
         //given
 
-
-
         Group g1 = new Group("Desc");
         Group g2 = new Group("Desc");
         repository.save(g1);

@@ -10,17 +10,36 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "USERS")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "USERS")
 public class User {
 
+    public User(String userName) {
+        this.userName = userName;
+    }
+
+    public User(Long id, @NotNull String userName) {
+        this.id = id;
+        this.userName = userName;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="USER_ID")
-    private Long userId;
+    @GeneratedValue
+    @NotNull
+    @Column(name = "USER_ID", unique = true)
+    private Long id;
+
+    @Column(name = "USER_NAME")
+    private String userName;
+
+    @Column(name = "USER_SURNAME")
+    private String userSurname;
+
+    @Column(name = "KEY_ID")
+    private String keyId;
 
     @OneToMany(
             targetEntity = Order.class,
@@ -30,19 +49,4 @@ public class User {
     )
     private List<Order> orders;
 
-    @Column(name = "KEY_ID")
-    private String keyId;
-
-    @NotNull
-    @Column(name = "USER_NAME")
-    private String userName;
-
-    @NotNull
-    @Column(name = "USER_SURNAME")
-    private String userSurname;
-
-    public User(String userName, String userSurname) {
-        this.userName = userName;
-        this.userSurname = userSurname;
-    }
 }

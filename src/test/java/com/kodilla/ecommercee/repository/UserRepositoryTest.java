@@ -27,51 +27,51 @@ public class UserRepositoryTest {
     public void testUserSave(){
 
         //Given
-        User user= new User("Jacob", "Johnson");
+        User user = new User("User");
 
         //When
         userRepository.save(user);
-        Long id= user.getUserId();
-        Optional<User> readUser= userRepository.findByUserId(id);
+        Long id= user.getId();
+        Optional<User> readUser= userRepository.findById(id);
 
         //Then
         assertTrue(readUser.isPresent());
 
         //CleanUp
-        userRepository.deleteByUserId(id);
+        userRepository.deleteById(id);
     }
 
     @Test
     public void testAddNewUser() {
 
         //Given
-        User user1= new User("Czeslaw", "Kowalski");
+        User user1= new User("User");
 
         //When
         userRepository.save(user1);
-        Long id= user1.getUserId();
+        Long id= user1.getId();
 
         //Then
         assertEquals(1,userRepository.findAll().size());
 
         //Clean up
-        userRepository.deleteByUserId(id);
+        userRepository.deleteById(id);
     }
 
     @Test
     public void testDeleteByUserId() {
 
         //Given
-        User user1= new User("Czeslaw", "Kowalski");
-        User user2= new User ("Nicola", "Smith");
+        User user1= new User("User");
+        User user2= new User ("User2");
         userRepository.save(user1);
         userRepository.save(user2);
-        Long id1= user1.getUserId();
-        Long id2= user2.getUserId();
+        Long id1= user1.getId();
+        Long id2= user2.getId();
 
         //When
-        userRepository.deleteByUserId(id1);
-        userRepository.deleteByUserId(id2);
+        userRepository.deleteById(id1);
+        userRepository.deleteById(id2);
 
         //Then
         assertEquals(0,userRepository.findAll().size());
@@ -81,27 +81,28 @@ public class UserRepositoryTest {
     public void testUserExistWhenOrderDelete(){
 
         //Given
-        User user1= new User("Czeslaw", "Kowalski");
-        User user2= new User ("Nicola", "Smith");
-        Order order= new Order(user1,"Address", LocalDate.now());
+        User user1= new User("User");
+        User user2= new User ("User2");
+        Order order= new Order("testAddress", LocalDate.now());
 
         //When
         userRepository.save(user1);
         userRepository.save(user2);
+
         orderRepository.save(order);
+
         orderRepository.deleteAll();
 
-        Long id1= user1.getUserId();
-        Long id2= user2.getUserId();
-        Long id3= order.getOrderId();
+        Long id1= user1.getId();
+        Long id2= user2.getId();
+
 
         //Then
         assertEquals(2, userRepository.findAll().size());
 
         //Clean up
-        userRepository.deleteByUserId(id1);
-        userRepository.deleteByUserId(id2);
-        orderRepository.deleteByOrderId(id3);
+        userRepository.deleteById(id1);
+        userRepository.deleteById(id2);
 
     }
 }

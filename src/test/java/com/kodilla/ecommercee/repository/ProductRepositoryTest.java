@@ -62,7 +62,7 @@ public class ProductRepositoryTest {
     @Test
     public void addNewProductWithGroup() {
         //Given
-        Group group = new Group(1L, "Desc1");
+        Group group = new Group("Desc1");
 
         Product product1 = new Product(group, "Product1", new BigDecimal(100), "Desc1");
         Product product2 = new Product(group, "Product2", new BigDecimal(100), "Desc2");
@@ -85,8 +85,8 @@ public class ProductRepositoryTest {
     @Test
     public void getProductListByGroupName() {
         //Given
-        Group group = new Group(1L, "Desc1");
-        Group group2 = new Group(2L, "Desc2");
+        Group group = new Group( "Desc1");
+        Group group2 = new Group( "Desc2");
 
         Product product1 = new Product(group, "Product1", new BigDecimal(100), "Desc1");
         Product product2 = new Product(group, "Product2", new BigDecimal(100), "Desc2");
@@ -114,18 +114,21 @@ public class ProductRepositoryTest {
     @Test
     public void addProductToGroup() {
         //Given
-        Group group = new Group(1L, "Desc1");
+        Group group = new Group("Desc1");
         Product product1 = new Product("Product1", new BigDecimal(100), "Desc1");
 
         //When
         groupRepository.save(group);
+
         productRepository.save(product1);
+
         group.getProducts().add(product1);
+
         product1.setGroup(group);
 
         //Then
         assertEquals(1, group.getProducts().size());
-        assertEquals(1L, Optional.ofNullable(product1.getGroup().getId()));
+        assertEquals(group.getId() , product1.getGroup().getId());
 
         //Clean up
         productRepository.deleteAll();
@@ -135,7 +138,7 @@ public class ProductRepositoryTest {
     @Test
     public void deleteProductById() {
         //Given
-        Group group = new Group(1L, "Desc1");
+        Group group = new Group("Desc1");
         Product product = new Product("Product1", new BigDecimal(100), "Desc1");
 
         groupRepository.save(group);
@@ -152,7 +155,7 @@ public class ProductRepositoryTest {
     @Test
     public void deleteProductByIdFromGroup() {
         //Given
-        Group group = new Group(1L, "Desc1");
+        Group group = new Group("Desc1");
         Product product = new Product(group,"Product1", new BigDecimal(100), "Desc1");
 
         groupRepository.save(group);
