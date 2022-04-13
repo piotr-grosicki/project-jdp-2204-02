@@ -29,16 +29,6 @@ public class GroupRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
 
-    @Id
-    @GeneratedValue
-    @NotNull
-    private Long groupId;
-
-    @Id
-    @GeneratedValue
-    @NotNull
-    private Long groupId2;
-
     @BeforeEach
     void init() {
         repository.deleteAll();
@@ -51,8 +41,8 @@ public class GroupRepositoryTest {
 
 
 
-        Group g1 = new Group(groupId,"Desc");
-        Group g2 = new Group(groupId2,"Desc");
+        Group g1 = new Group("Desc");
+        Group g2 = new Group("Desc");
         repository.save(g1);
         repository.save(g2);
 
@@ -71,8 +61,8 @@ public class GroupRepositoryTest {
     public void testFindByGroupId(){
         //GIVEN
 
-        Group g1 = new Group(groupId,"Desc");
-        Group g2 = new Group( groupId2,"Desc2");
+        Group g1 = new Group("Desc");
+        Group g2 = new Group("Desc2");
         repository.save(g1);
         repository.save(g2);
 
@@ -92,8 +82,8 @@ public class GroupRepositoryTest {
     @Test
     public void testSave(){
         //given&when
-        Group g1 = new Group(groupId,"Desc");
-        Group g2 = new Group(groupId2,"Desc");
+        Group g1 = new Group("Desc");
+        Group g2 = new Group("Desc");
         repository.save(g1);
         repository.save(g2);
         //then
@@ -104,8 +94,8 @@ public class GroupRepositoryTest {
     @Test
     public void testDeleteByGroupId(){
         //given
-        Group g1 = new Group(groupId, "Desc");
-        Group g2 = new Group(groupId2, "Desc2");
+        Group g1 = new Group( "Desc");
+        Group g2 = new Group( "Desc2");
         repository.save(g1);
         repository.save(g2);
         //when
@@ -123,7 +113,7 @@ public class GroupRepositoryTest {
         Product p1 = new Product("Laptop",new BigDecimal(999),"Desc");
         Product p2 = new Product("TV",new BigDecimal(1999),"New");
         Product p3 = new Product("Car",new BigDecimal(99999),"4x4");
-        Group group = new Group(groupId,"Desc");
+        Group group = new Group("Desc");
         productRepository.save(p1);
         productRepository.save(p2);
         productRepository.save(p3);
@@ -147,7 +137,7 @@ public class GroupRepositoryTest {
         Product p2 = new Product("TV",new BigDecimal(1999),"New");
         Product p3 = new Product("Car",new BigDecimal(99999),"4x4");
 
-        Group group = new Group(groupId,"Desc");
+        Group group = new Group("Desc");
 
         productRepository.save(p1);
         productRepository.save(p2);
@@ -177,7 +167,7 @@ public class GroupRepositoryTest {
         Product p1 = new Product("Laptop",new BigDecimal(999),"Desc");
         Product p2 = new Product("TV",new BigDecimal(1999),"New");
         Product p3 = new Product("Car",new BigDecimal(99999),"4x4");
-        Group group = new Group(groupId,"Desc");
+        Group group = new Group("Desc");
         productRepository.save(p1);
         productRepository.save(p2);
         productRepository.save(p3);
