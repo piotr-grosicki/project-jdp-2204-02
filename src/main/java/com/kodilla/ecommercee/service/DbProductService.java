@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.Exeptions.ProductNotFoundException;
+import com.kodilla.ecommercee.Exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ public class DbProductService {
         return repository.findAll();
     }
 
-    public Product getProductWithId(final Long productId)throws ProductNotFoundException {
-        return repository.findByProductId(productId).orElseThrow(ProductNotFoundException::new);
+    public Product getProductWithId(final Long Id)throws ProductNotFoundException {
+        return repository.findById(Id).orElseThrow(ProductNotFoundException::new);
     }
 
     public Product saveProduct(final Product product) {

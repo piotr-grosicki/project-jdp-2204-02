@@ -15,12 +15,33 @@ import java.time.LocalDate;
 @Getter
 public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ORDER_ID")
-    private Long orderId;
+    public Order(String address, LocalDate now) {
+        this.address = address;
+        this.created = now;
+    }
 
-    @ManyToOne
+
+    public Order(User user, String address, LocalDate now) {
+        this.user = user;
+        this.address = address;
+        this.created = now;
+    }
+
+    public Order(User user, Cart cart, String address, LocalDate now) {
+        this.user = user;
+        this.cart = cart;
+        this.address = address;
+        this.created = now;
+    }
+
+    @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name = "ORDER_ID", unique = true)
+    private Long id;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @OneToOne(mappedBy = "order")
@@ -34,22 +55,4 @@ public class Order {
     @NotNull
     @Column(name = "DATE_CREATED")
     private LocalDate created;
-
-    public Order(String address, LocalDate created) {
-        this.address = address;
-        this.created = created;
-    }
-
-    public Order(User user, String address, LocalDate created) {
-        this.user = user;
-        this.address = address;
-        this.created = created;
-    }
-
-    public Order(User user, Cart cart, String address, LocalDate created) {
-        this.user = user;
-        this.cart = cart;
-        this.address = address;
-        this.created = created;
-    }
 }
