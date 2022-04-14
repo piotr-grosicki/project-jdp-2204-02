@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.Exeptions;
+package com.kodilla.ecommercee.Exceptions;
 
 public class UserNotFoundException extends Exception {
 }

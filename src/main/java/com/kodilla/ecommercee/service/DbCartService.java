@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.Exeptions.CartNotFoundException;
+import com.kodilla.ecommercee.Exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.repository.CartRepository;
 import lombok.RequiredArgsConstructor;

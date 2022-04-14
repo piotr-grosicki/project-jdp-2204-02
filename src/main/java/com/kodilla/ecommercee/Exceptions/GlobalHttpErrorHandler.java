@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.Exceptions;
 
-import com.kodilla.ecommercee.Exeptions.UserNotFoundException;
+import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.Exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
