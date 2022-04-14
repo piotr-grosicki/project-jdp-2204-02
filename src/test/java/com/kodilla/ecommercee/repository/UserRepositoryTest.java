@@ -27,25 +27,25 @@ public class UserRepositoryTest {
     public void testUserSave(){
 
         //Given
-        User user= new User("Jacob", "Johnson");
+        User user = new User("Name", "Surname");
 
         //When
         userRepository.save(user);
         Long id= user.getUserId();
-        Optional<User> readUser= userRepository.findByUserId(id);
+        Optional<User> readUser= userRepository.findById(id);
 
         //Then
         assertTrue(readUser.isPresent());
 
         //CleanUp
-        userRepository.deleteByUserId(id);
+        userRepository.deleteById(id);
     }
 
     @Test
     public void testAddNewUser() {
 
         //Given
-        User user1= new User("Czeslaw", "Kowalski");
+        User user1= new User("Name", "Surname");
 
         //When
         userRepository.save(user1);
@@ -55,64 +55,66 @@ public class UserRepositoryTest {
         assertEquals(1,userRepository.findAll().size());
 
         //Clean up
-        userRepository.deleteByUserId(id);
+        userRepository.deleteById(id);
     }
 
     @Test
     public void testDeleteByUserId() {
 
         //Given
-        User user1= new User("Czeslaw", "Kowalski");
-        User user2= new User ("Nicola", "Smith");
+        User user1= new User("Name", "Surname");
+        User user2= new User ("Name2", "Surname2");
         userRepository.save(user1);
         userRepository.save(user2);
         Long id1= user1.getUserId();
         Long id2= user2.getUserId();
 
         //When
-        userRepository.deleteByUserId(id1);
-        userRepository.deleteByUserId(id2);
+        userRepository.deleteById(id1);
+        userRepository.deleteById(id2);
 
         //Then
         assertEquals(0,userRepository.findAll().size());
     }
 
     @Test
-    public void testUserExistWhenOrderDelete(){
+    public void testUserExistWhenOrderDelete()
+    {
 
         //Given
-        User user1= new User("Czeslaw", "Kowalski");
-        User user2= new User ("Nicola", "Smith");
-        Order order= new Order(user1,"Address", LocalDate.now());
+        User user1 = new User("Name", "Surname");
+        User user2 = new User("Name2", "Surname2");
+        Order order = new Order("testAddress", LocalDate.now());
 
         //When
         userRepository.save(user1);
         userRepository.save(user2);
+
         orderRepository.save(order);
+
         orderRepository.deleteAll();
 
-        Long id1= user1.getUserId();
-        Long id2= user2.getUserId();
-        Long id3= order.getOrderId();
+        Long id1 = user1.getUserId();
+        Long id2 = user2.getUserId();
+
 
         //Then
         assertEquals(2, userRepository.findAll().size());
 
         //Clean up
-        userRepository.deleteByUserId(id1);
-        userRepository.deleteByUserId(id2);
-        orderRepository.deleteByOrderId(id3);
+        userRepository.deleteById(id1);
+        userRepository.deleteById(id2);
     }
 
     @Test
-    public void testUserBlocked(){
+    public void testUserBlocked() {
 
         //Given
-        User user1= new User("Mary", "Cold");
-        User user2= new User("John", "Biden");
-        User user3= new User("Katy", "Melua");
-        User user4= new User("King", "Broo");
-        User user5= new User("Wally", "Tomato");
+        User user1 = new User("Mary", "Cold");
+        User user2 = new User("John", "Biden");
+        User user3 = new User("Katy", "Melua");
+        User user4 = new User("King", "Broo");
+        User user5 = new User("Wally", "Tomato");
 
         //When
         user1.setUserBlocked(true);

@@ -19,8 +19,9 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCT_ID")
+    @GeneratedValue
+    @NotNull
+    @Column(name = "PRODUCT_ID", unique = true)
     private Long productId;
 
     @ManyToOne
