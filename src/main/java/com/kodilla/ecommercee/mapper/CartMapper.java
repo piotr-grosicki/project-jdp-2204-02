@@ -2,13 +2,16 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.dto.CartDto;
+import com.kodilla.ecommercee.service.DbCartService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CartMapper {
+
+    private DbCartService cartService;
 
     public Cart mapToCart(final CartDto cartDto) {
         return new Cart(
@@ -23,13 +26,20 @@ public class CartMapper {
                 cart.getId(),
                 cart.getOrder(),
                 cart.getUser(),
-                cart.getProducts()
-        );
+                cartService.getCartPrice(cart.getId()),
+                cart.getProducts());
     }
 
     public List<CartDto> mapToCartDtoList(final List<Cart> carts) {
-        return carts.stream()
-                .map(this::mapToCartDto)
-                .collect(Collectors.toList());
+        List<CartDto> cartDtoList = new ArrayList<>();
+        for (Cart cart : carts) {
+           cartDtoList.add(new CartDto(
+                   cart.getId(),
+                   cart.getOrder(),
+                   cart.getUser(),
+                   cartService.getCartPrice(cart.getId()),
+                   cart.getProducts()));
+        }
+        return cartDtoList;
     }
 }
