@@ -67,8 +67,11 @@ public class CartController {
     }
 
     @DeleteMapping(value = "{cartId}")
-    public ResponseEntity<Void> deleteCart(@PathVariable Long cartId) {
-        service.deleteCart(cartId);
+    public ResponseEntity<Void> deleteCart(@PathVariable Long cartId) throws CartNotFoundException {
+        Cart cart = service.getCartById(cartId);
+        List<Product> products = cart.getProducts();
+        cart.getProducts().removeAll(products);
+        service.saveCart(cart);
         return ResponseEntity.ok().build();
     }
 }

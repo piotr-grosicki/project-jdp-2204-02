@@ -34,8 +34,4 @@ public class DbCartService {
     public Cart saveCart(final Cart cart) {
         return cartRepository.save(cart);
     }
-
-    public void deleteCart(final Long id) {
-        cartRepository.deleteById(id);
-    }
 }
