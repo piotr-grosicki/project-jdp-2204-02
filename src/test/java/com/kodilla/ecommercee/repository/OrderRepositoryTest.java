@@ -25,9 +25,6 @@ public class OrderRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private CartRepository cartRepository;
-
     @Test
     public void addNewOrder() {
         //Given
@@ -100,12 +97,10 @@ public class OrderRepositoryTest {
     public void findUserForOrder(){
         //Given
         User testUser = new User("Name", "Surname");
-        Cart testCart = new Cart();
-        Order testOrder = new Order(testUser, testCart, "address", LocalDate.now());
+        Order testOrder = new Order(testUser, "address", LocalDate.now());
 
         //When
         userRepository.save(testUser);
-        cartRepository.save(testCart);
         orderRepository.save(testOrder);
 
         //Then
@@ -113,7 +108,6 @@ public class OrderRepositoryTest {
 
         //Clean up
         userRepository.deleteAll();
-        cartRepository.deleteAll();
         orderRepository.deleteAll();
     }
 
@@ -121,12 +115,10 @@ public class OrderRepositoryTest {
     public void deleteOrderById(){
         //Given
         User testUser = new User("Name", "Surname");
-        Cart testCart = new Cart();
-        Order testOrder = new Order(testUser, testCart, "address", LocalDate.now());
+        Order testOrder = new Order(testUser, "address", LocalDate.now());
 
         //When
         userRepository.save(testUser);
-        cartRepository.save(testCart);
         orderRepository.save(testOrder);
 
         //Then
@@ -135,33 +127,11 @@ public class OrderRepositoryTest {
         orderRepository.deleteById(testOrder.getId());
 
         assertEquals(0, orderRepository.findAll().size());
-        assertEquals(1, cartRepository.findAll().size());
         assertEquals(1, userRepository.findAll().size());
 
         //Clean up
         userRepository.deleteAll();
-        cartRepository.deleteAll();
         orderRepository.deleteAll();
     }
 
-    @Test
-    public void findCartForOrder(){
-        //Given
-        User testUser = new User("Name", "Surname");
-        Cart testCart = new Cart();
-        Order testOrder = new Order(testUser, testCart, "address", LocalDate.now());
-
-        //When
-        userRepository.save(testUser);
-        cartRepository.save(testCart);
-        orderRepository.save(testOrder);
-
-        //Then
-        assertEquals(testCart, testOrder.getCart());
-
-        //Clean up
-        userRepository.deleteAll();
-        cartRepository.deleteAll();
-        orderRepository.deleteAll();
-    }
 }

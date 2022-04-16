@@ -20,9 +20,6 @@ public class Cart {
     @Column(name = "CART_ID")
     private Long id;
 
-    @OneToOne
-    private Order order;
-
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;

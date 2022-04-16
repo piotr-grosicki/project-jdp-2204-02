@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.Exeptions.UserNotFoundException;
+import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class DbUserService {
     public User addUser(final User user) {
         return repository.save(user);
     }
-    public User getUserWithId(final Long userId)throws UserNotFoundException {
+    public User getUserWithId(final Long userId) throws UserNotFoundException {
         return repository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
     }
 
