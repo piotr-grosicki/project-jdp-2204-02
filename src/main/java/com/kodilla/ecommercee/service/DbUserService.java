@@ -20,7 +20,7 @@ public class DbUserService {
     public User addUser(final User user) {
         return repository.save(user);
     }
-    public User getUserWithId(final Long userId)throws UserNotFoundException {
+    public User getUserWithId(final Long userId) throws UserNotFoundException {
         return repository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
     }
 

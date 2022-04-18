@@ -16,7 +16,6 @@ public class CartMapper {
     public Cart mapToCart(final CartDto cartDto) {
         return new Cart(
                 cartDto.getId(),
-                cartDto.getOrder(),
                 cartDto.getUser(),
                 cartDto.getProducts());
     }
@@ -24,7 +23,6 @@ public class CartMapper {
     public CartDto mapToCartDto(final Cart cart) {
         return new CartDto(
                 cart.getId(),
-                cart.getOrder(),
                 cart.getUser(),
                 cartService.getCartPrice(cart.getId()),
                 cart.getProducts());
@@ -33,12 +31,11 @@ public class CartMapper {
     public List<CartDto> mapToCartDtoList(final List<Cart> carts) {
         List<CartDto> cartDtoList = new ArrayList<>();
         for (Cart cart : carts) {
-           cartDtoList.add(new CartDto(
-                   cart.getId(),
-                   cart.getOrder(),
-                   cart.getUser(),
-                   cartService.getCartPrice(cart.getId()),
-                   cart.getProducts()));
+            cartDtoList.add(new CartDto(
+                    cart.getId(),
+                    cart.getUser(),
+                    cartService.getCartPrice(cart.getId()),
+                    cart.getProducts()));
         }
         return cartDtoList;
     }
