@@ -2,21 +2,19 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.Exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.Exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.Product;
+import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.dto.CartDto;
-import com.kodilla.ecommercee.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.CartMapper;
-import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.DbCartService;
-import com.kodilla.ecommercee.service.DbProductService;
+import com.kodilla.ecommercee.service.DbUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/carts")
@@ -24,9 +22,10 @@ import java.util.Optional;
 public class CartController {
 
     private final DbCartService service;
-    private final DbProductService productService;
     private final CartMapper cartMapper;
+    private final DbUserService userService;
 
+    //root
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createCart(@RequestBody CartDto cartDto) {
         Cart cart = cartMapper.mapToCart(cartDto);
@@ -34,17 +33,21 @@ public class CartController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "{cartId}")
-    public ResponseEntity<CartDto> getCart(@PathVariable Long cartId) throws CartNotFoundException {
-        return ResponseEntity.ok(cartMapper.mapToCartDto(service.getCartById(cartId)));
+    //user
+    @GetMapping(value = "{userId}")
+    public ResponseEntity<CartDto> getCart(@PathVariable Long userId) throws UserNotFoundException {
+        User user = userService.getUserWithId(userId);
+        return ResponseEntity.ok(cartMapper.mapToCartDto(service.getCartByUser(user)));
     }
 
+    //admin
     @GetMapping
     public ResponseEntity<List<CartDto>> getAllCarts() {
         List<Cart> carts = service.getAllCarts();
         return ResponseEntity.ok(cartMapper.mapToCartDtoList(carts));
     }
 
+    //admin
     @PutMapping
     public ResponseEntity<CartDto> editCart(@RequestBody CartDto cartDto) {
         Cart cart = cartMapper.mapToCart(cartDto);
@@ -52,29 +55,25 @@ public class CartController {
         return ResponseEntity.ok(cartMapper.mapToCartDto(editedCart));
     }
 
+    //user
     @PutMapping(value = "/{cartId}/add/{productId}")
     public ResponseEntity<CartDto> addProductToCart(@PathVariable Long cartId, @PathVariable Long productId) throws CartNotFoundException, ProductNotFoundException {
-        Cart cart = service.getCartById(cartId);
-        Product product = productService.getProductWithId(productId);
-        cart.getProducts().add(product);
-        Cart updatedCart = service.saveCart(cart);
+        Cart updatedCart = service.addNewProductToCart(cartId, productId);
         return ResponseEntity.ok(cartMapper.mapToCartDto(updatedCart));
     }
 
-    @DeleteMapping(value = "/delete/{cartId}/{item}")
+    //user
+    @DeleteMapping(value = "/{cartId}/delete/{item}")
     public ResponseEntity<Void> deleteProductFromCart(@PathVariable Long cartId, @PathVariable int item) throws CartNotFoundException {
-        Cart cart = service.getCartById(cartId);
-        cart.getProducts().remove(item);
-        service.saveCart(cart);
+        service.deleteProduct(cartId, item);
         return ResponseEntity.ok().build();
     }
 
+    //user
     @DeleteMapping(value = "{cartId}")
     public ResponseEntity<Void> deleteCart(@PathVariable Long cartId) throws CartNotFoundException {
-        Cart cart = service.getCartById(cartId);
-        List<Product> products = cart.getProducts();
-        cart.getProducts().removeAll(products);
-        service.saveCart(cart);
+        service.clearCart(cartId);
         return ResponseEntity.ok().build();
     }
+
 }

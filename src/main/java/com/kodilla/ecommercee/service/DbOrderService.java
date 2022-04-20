@@ -1,6 +1,9 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.Exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.Exceptions.OrderNotFoundException;
+import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
+import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.User;
@@ -16,6 +19,8 @@ import java.util.List;
 public class DbOrderService {
 
     private final OrderRepository repository;
+    private final DbUserService userService;
+    private  final DbCartService cartService;
 
     public List<Order> getAllOrders() {
         return repository.findAll();
@@ -47,5 +52,22 @@ public class DbOrderService {
                 .map(Product::getProductPrice)
                 .reduce(BigDecimal.ZERO, (sum, current) -> sum = sum.add(current));
         return result;
+    }
+
+    public void createNewOrder(Long userId) throws UserNotFoundException {
+        User user = userService.getUserWithId(userId);
+        Cart cart = cartService.getCartByUser(user);
+        Order order = new Order();
+        order.setUser(user);
+        order.setProducts(cart.getProducts());
+        saveOrder(order);
+        cart.getProducts().clear();
+        cartService.saveCart(cart);
+    }
+
+    public void cancelThisOrder(Long orderId) throws OrderNotFoundException {
+        Order order = getOrderById(orderId);
+        order.setOrderCanceled(true);
+        saveOrder(order);
     }
 }
