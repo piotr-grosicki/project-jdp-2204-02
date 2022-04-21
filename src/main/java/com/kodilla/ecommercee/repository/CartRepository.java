@@ -1,6 +1,8 @@
 package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.Order;
+import com.kodilla.ecommercee.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +18,5 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     Optional<Cart> findById(Long cartId);
     Cart save(Cart cart);
     void deleteById(Long cartId);
+    Cart findByUser(User user);
 }

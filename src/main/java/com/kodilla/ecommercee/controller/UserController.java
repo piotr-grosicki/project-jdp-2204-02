@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController
@@ -22,48 +21,67 @@ public class UserController {
     private final DbUserService service;
     private final UserMapper userMapper;
 
+    //admin
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<User> users=service.getAllUsers();
         return ResponseEntity.ok(userMapper.mapToUserDtoList(users));
     }
 
+    //admin
     @GetMapping(value = "/active_users")
     public ResponseEntity<List<UserDto>> getAllActiveUsers(){
-        Boolean blocked = false;
-        List<User> activeUsers= service.getAllBlockedUsers(blocked);
+        List<User> activeUsers= service.getAllBlockedUsers(false);
         return ResponseEntity.ok(userMapper.mapToUserDtoList(activeUsers));
     }
 
+    //admin
     @GetMapping(value = "/blocked_users")
     public ResponseEntity<List<UserDto>> getAllBlockedUsers(){
-        Boolean blocked=true;
-        List<User> blockedUsers= service.getAllBlockedUsers(blocked);
+        List<User> blockedUsers= service.getAllBlockedUsers(true);
         return ResponseEntity.ok(userMapper.mapToUserDtoList(blockedUsers));
     }
 
+    //user
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<UserDto> getUser(@PathVariable Long userId) throws UserNotFoundException {
+        return ResponseEntity.ok(userMapper.mapToUserDto(service.getUserWithId(userId)));
+    }
+
+    //all
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addUser(@RequestBody UserDto userDto) {
-        User user= userMapper.mapToUser(userDto);
-        service.addUser(user);
+        service.createNewUser(userDto);
         return ResponseEntity.ok().build();
     }
 
+    //user
     @PutMapping(value = "block_user/{userId}")
     public ResponseEntity<UserDto> blockUser(@PathVariable Long userId) throws UserNotFoundException {
-        User user=service.getUserWithId(userId);
-        user.setUserBlocked(true);
-        User updateUser=service.addUser(user);
+        User updateUser = service.changeStatus(userId, true);
         return ResponseEntity.ok(userMapper.mapToUserDto(updateUser));
     }
 
+    //admin
+    @PutMapping(value = "unblock_user/{userId}")
+    public ResponseEntity<UserDto> unblockUser(@PathVariable Long userId) throws UserNotFoundException {
+        User updateUser = service.changeStatus(userId, false);
+        return ResponseEntity.ok(userMapper.mapToUserDto(updateUser));
+    }
+
+    //user
     @PutMapping(value="createKey/{userId}")
     public ResponseEntity<UserDto> createKey(@PathVariable Long userId) throws UserNotFoundException {
-        User user= service.getUserWithId(userId);
-        final String uuid = UUID.randomUUID().toString().replace("-", "");
-        user.setKeyId(uuid);
-        User updateUser=service.addUser(user);
+        User updateUser = service.generateKey(userId);
         return ResponseEntity.ok(userMapper.mapToUserDto(updateUser));
 
     }
+
+    //root
+    @DeleteMapping(value = "/hardDeleteUser/{userId}")
+    public ResponseEntity<Void> hardDeleteUser(@PathVariable Long userId) throws UserNotFoundException {
+        service.deleteUser(userId);
+        return ResponseEntity.ok().build();
+    }
+
 }

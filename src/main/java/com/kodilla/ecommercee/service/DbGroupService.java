@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class GroupService {
+public class DbGroupService {
     private final GroupRepository repository;
 
     public List<Group> getGroups() {

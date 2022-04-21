@@ -4,9 +4,10 @@ import com.kodilla.ecommercee.Exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.dto.GroupDto;
 import com.kodilla.ecommercee.mapper.GroupMapper;
-import com.kodilla.ecommercee.service.GroupService;
+import com.kodilla.ecommercee.service.DbGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,40 +16,43 @@ import java.util.List;
 @RequestMapping("/v1/group")
 @RequiredArgsConstructor
 public class GroupController {
-    private final GroupService service;
-    private final GroupMapper mapper;
 
+    private final DbGroupService service;
+    private final GroupMapper groupMapper;
+
+    //all
     @GetMapping
-    public List<GroupDto> getGroups() {
+    public ResponseEntity<List<GroupDto>> getGroups() {
         List<Group> groups = service.getGroups();
-        return mapper.mapToGroupDtoList(groups);
+        return ResponseEntity.ok(groupMapper.mapToGroupDtoList(groups));
     }
 
+    //all
     @GetMapping(value = "{id}")
-    public GroupDto getGroup(@PathVariable Long id) throws GroupNotFoundException
-    {
-        return mapper.mapToGroupDto(service.getGroup(id).orElseThrow(GroupNotFoundException::new));
+    public ResponseEntity<GroupDto> getGroup(@PathVariable Long id) throws GroupNotFoundException {
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(service.getGroup(id).orElseThrow(GroupNotFoundException::new)));
     }
 
+    //admin
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GroupDto createGroup(@RequestBody GroupDto groupDto) {
-        Group group = mapper.mapToGroup(groupDto);
-        Group saved = service.saveGroup(group);
-
-        // Return version of group saved to the DB.
-        // Avoid unnecessary HTTP GET request for added group details
-        return mapper.mapToGroupDto(saved);
+    public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
+        Group group = groupMapper.mapToGroup(groupDto);
+        service.saveGroup(group);
+        return ResponseEntity.ok().build();
     }
 
+    //admin
     @PutMapping
-    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
-        Group group = mapper.mapToGroup(groupDto);
+    public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
+        Group group = groupMapper.mapToGroup(groupDto);
         Group updatedGroup = service.saveGroup(group);
-        return mapper.mapToGroupDto(updatedGroup);
+        return ResponseEntity.ok(groupMapper.mapToGroupDto(updatedGroup));
     }
 
+    //root
     @DeleteMapping(value = "{id}")
-    public void deleteGroup(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteGroup(@PathVariable Long id) {
         service.deleteGroup(id);
+        return ResponseEntity.ok().build();
     }
 }

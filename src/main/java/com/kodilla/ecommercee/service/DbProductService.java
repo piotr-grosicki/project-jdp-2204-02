@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.Exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,10 @@ public class DbProductService {
 
     public void deleteProduct(final Long productId) {
         repository.deleteByProductId(productId);
+    }
+
+    public List<Product> getAllProductsByGroup(final Group group) {
+        return repository.findByGroup(group);
     }
 
 }

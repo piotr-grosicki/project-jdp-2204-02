@@ -45,6 +45,9 @@ public class User {
     @Column(name="USER_BLOCKED")
     private Boolean userBlocked=Boolean.FALSE;
 
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+
     public void setUserBlocked(Boolean userBlocked) {
         this.userBlocked = userBlocked;
     }
