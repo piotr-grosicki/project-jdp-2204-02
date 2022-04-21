@@ -20,7 +20,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "PRODUCT_ID", unique = true)
     private Long productId;
 
@@ -41,9 +40,6 @@ public class Product {
     private String productDescription;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "cartProducts",
-               joinColumns = @JoinColumn(name = "cart_id"),
-               inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Cart> carts;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
