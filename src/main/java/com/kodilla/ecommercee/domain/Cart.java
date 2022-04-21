@@ -18,7 +18,7 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CART_ID")
     private Long id;
 
@@ -26,7 +26,14 @@ public class Cart {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "cartWithProducts",
+            joinColumns = @JoinColumn(name = "products_id"),
+            inverseJoinColumns = @JoinColumn(name = "carts_id"))
     private List<Product>products = new ArrayList<>();
 
+    public Cart(Long id, List<Product> products) {
+        this.id = id;
+        this.products = products;
+    }
 }

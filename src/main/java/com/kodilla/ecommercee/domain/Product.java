@@ -19,7 +19,7 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "PRODUCT_ID", unique = true)
     private Long productId;
@@ -40,13 +40,13 @@ public class Product {
     @Column(name = "DESCRIPTION")
     private String productDescription;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "cartProducts",
-               joinColumns = @JoinColumn(name = "PRODUCTS_ID"),
-               inverseJoinColumns = @JoinColumn(name = "cart_id"))
+               joinColumns = @JoinColumn(name = "cart_id"),
+               inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Cart> carts;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "orderProducts",
             joinColumns = @JoinColumn(name = "PRODUCTS_ID"),
             inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))

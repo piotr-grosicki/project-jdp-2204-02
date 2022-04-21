@@ -56,16 +56,16 @@ public class CartController {
     }
 
     //user
-    @PutMapping(value = "/{cartId}/add/{productId}")
-    public ResponseEntity<CartDto> addProductToCart(@PathVariable Long cartId, @PathVariable Long productId) throws CartNotFoundException, ProductNotFoundException {
-        Cart updatedCart = service.addNewProductToCart(cartId, productId);
-        return ResponseEntity.ok(cartMapper.mapToCartDto(updatedCart));
+    @PutMapping(value = "/{userId}/add/{productId}")
+    public ResponseEntity<Void> addProductToCart(@PathVariable Long userId, @PathVariable Long productId) throws ProductNotFoundException, UserNotFoundException {
+        service.addNewProductToCart(userId, productId);
+        return ResponseEntity.ok().build();
     }
 
     //user
-    @DeleteMapping(value = "/{cartId}/delete/{item}")
-    public ResponseEntity<Void> deleteProductFromCart(@PathVariable Long cartId, @PathVariable int item) throws CartNotFoundException {
-        service.deleteProduct(cartId, item);
+    @DeleteMapping(value = "/{userId}/delete/{productId}")
+    public ResponseEntity<Void> deleteProductFromCart(@PathVariable Long userId, @PathVariable Long productId) throws UserNotFoundException, ProductNotFoundException {
+        service.deleteProduct(userId, productId);
         return ResponseEntity.ok().build();
     }
 

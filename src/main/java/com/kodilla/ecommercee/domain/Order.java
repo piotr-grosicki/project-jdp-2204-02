@@ -20,7 +20,7 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "ORDER_ID", unique = true)
     private Long id;
@@ -30,28 +30,14 @@ public class Order {
     private User user;
 
     @NotNull
-    @Column(name = "ADDRESS")
-    private String address;
-
-    @NotNull
     @Column(name = "DATE_CREATED")
-    private LocalDate created;
+    private LocalDate created = LocalDate.now();
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
-    private List<Product>products = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Product> products = new ArrayList<>();
 
     @NotNull
     @Column(name="ORDER_CANCELED")
     private Boolean orderCanceled=Boolean.FALSE;
 
-    public Order(String address, LocalDate now) {
-        this.address = address;
-        this.created = now;
-    }
-
-    public Order(User user, String address, LocalDate now) {
-        this.user = user;
-        this.address = address;
-        this.created = now;
-    }
 }

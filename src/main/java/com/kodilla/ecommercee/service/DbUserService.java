@@ -42,7 +42,6 @@ public class DbUserService {
         User user = userMapper.mapToUser(userDto);
         Cart cart = new Cart();
         cart.setUser(user);
-        user.setCart(cart);
         cartRepository.save(cart);
         addUser(user);
     }

@@ -133,4 +133,9 @@ public class UserRepositoryTest {
         //Clean up
         userRepository.deleteAll();
     }
+
+    @Test
+    public void cleanUp() {
+        userRepository.deleteAll();
+    }
 }

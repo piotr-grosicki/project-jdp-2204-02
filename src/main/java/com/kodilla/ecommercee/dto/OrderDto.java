@@ -1,7 +1,5 @@
 package com.kodilla.ecommercee.dto;
 
-import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,10 +14,9 @@ import java.util.List;
 public class OrderDto {
 
     private Long id;
-    private User user;
-    private String address;
+    private Long userId;
     private LocalDate created;
-    private List<Product> products;
+    private List<ProductDto> products;
     private BigDecimal orderPrice;
     private Boolean status;
 }
