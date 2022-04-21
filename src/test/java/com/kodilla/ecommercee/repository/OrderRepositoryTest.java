@@ -28,7 +28,7 @@ public class OrderRepositoryTest {
     @Test
     public void addNewOrder() {
         //Given
-        Order testOrder = new Order("testAddress", LocalDate.now());
+        Order testOrder = new Order();
         //When
         orderRepository.save(testOrder);
         //Then
@@ -39,9 +39,9 @@ public class OrderRepositoryTest {
     @Test
     public void testFindAllOrders(){
         //Given
-        Order testOrder = new Order("testAddress", LocalDate.now());
-        Order testOrder2 = new Order("testAddress", LocalDate.now());
-        Order testOrder3 = new Order("testAddress", LocalDate.now());
+        Order testOrder = new Order();
+        Order testOrder2 = new Order();
+        Order testOrder3 = new Order();
 
         //When
         orderRepository.save(testOrder);
@@ -57,7 +57,7 @@ public class OrderRepositoryTest {
 
     @Test
     public void testFindByOrderId() {
-        Order testOrder = new Order("testAddress", LocalDate.now());
+        Order testOrder = new Order();
         //When
         orderRepository.save(testOrder);
         Optional<Order> testOrderId = orderRepository.findById(testOrder.getId());
@@ -71,8 +71,8 @@ public class OrderRepositoryTest {
         //Given
         User testUser = new User("Name", "Surname");
 
-        Order testOrder = new Order(testUser, "address", LocalDate.now());
-        Order testOrder2 = new Order(testUser, "address", LocalDate.now());
+        Order testOrder = new Order(testUser);
+        Order testOrder2 = new Order(testUser);
 
         //When
         userRepository.save(testUser);
@@ -97,7 +97,7 @@ public class OrderRepositoryTest {
     public void findUserForOrder(){
         //Given
         User testUser = new User("Name", "Surname");
-        Order testOrder = new Order(testUser, "address", LocalDate.now());
+        Order testOrder = new Order(testUser);
 
         //When
         userRepository.save(testUser);
@@ -115,7 +115,7 @@ public class OrderRepositoryTest {
     public void deleteOrderById(){
         //Given
         User testUser = new User("Name", "Surname");
-        Order testOrder = new Order(testUser, "address", LocalDate.now());
+        Order testOrder = new Order(testUser);
 
         //When
         userRepository.save(testUser);

@@ -39,4 +39,7 @@ public class Order {
     @Column(name="ORDER_CANCELED")
     private Boolean orderCanceled=Boolean.FALSE;
 
+    public Order(User user) {
+        this.user = user;
+    }
 }
