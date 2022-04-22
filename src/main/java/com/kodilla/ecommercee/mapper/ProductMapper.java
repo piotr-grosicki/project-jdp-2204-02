@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.dto.ProductDto;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,8 +40,22 @@ public class ProductMapper {
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> productList) {
-        return productList.stream()
-                .map(this::mapToProductDto)
-                .collect(Collectors.toList());
+        if (productList.isEmpty())
+            return new ArrayList<>();
+        else {
+            return productList.stream()
+                    .map(this::mapToProductDto)
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public List<Product> mapToProductList(final List<ProductDto> productList) {
+        if (productList.isEmpty())
+            return new ArrayList<>();
+        else {
+            return productList.stream()
+                    .map(this::mapToProduct)
+                    .collect(Collectors.toList());
+        }
     }
 }

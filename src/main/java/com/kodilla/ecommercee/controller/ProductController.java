@@ -32,7 +32,7 @@ public class ProductController {
     //all
     @GetMapping(value = "{productId}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId) throws ProductNotFoundException {
-        return ResponseEntity.ok(productMapper.mapToProductDto(service.getProductWithId(productId)));
+        return ResponseEntity.ok(productMapper.mapToProductDto(service.getProductById(productId)));
     }
 
     //all
@@ -43,10 +43,9 @@ public class ProductController {
     }
 
     //admin
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addNewProduct(@RequestBody ProductDto productDto) {
-        Product product = productMapper.mapToProduct(productDto);
-        service.saveProduct(product);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "/addToGroup={groupId}")
+    public ResponseEntity<Void> addNewProduct(@RequestBody ProductDto productDto,@PathVariable Long groupId) {
+        service.addProductToGroup(productDto, groupId);
         return ResponseEntity.ok().build();
     }
 

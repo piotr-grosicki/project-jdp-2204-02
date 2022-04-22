@@ -22,8 +22,8 @@ public class UserMapper {
         return new UserDto(
                 user.getUserId(),
                 user.getUserName(),
-                user.getUserSurname()
-        );
+                user.getUserSurname(),
+                user.getCart().getId());
     }
 
     public List<UserDto> mapToUserDtoList(final List<User> userList) {

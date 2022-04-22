@@ -84,7 +84,7 @@ public class UserRepositoryTest {
         //Given
         User user1 = new User("Name", "Surname");
         User user2 = new User("Name2", "Surname2");
-        Order order = new Order("testAddress", LocalDate.now());
+        Order order = new Order();
 
         //When
         userRepository.save(user1);
@@ -131,6 +131,11 @@ public class UserRepositoryTest {
         assertEquals(5, userRepository.findAll().size());
 
         //Clean up
+        userRepository.deleteAll();
+    }
+
+    @Test
+    public void cleanUp() {
         userRepository.deleteAll();
     }
 }

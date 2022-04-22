@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.Exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.Exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.domain.Cart;
@@ -59,7 +58,9 @@ public class DbOrderService {
         Cart cart = cartService.getCartByUser(user);
         Order order = new Order();
         order.setUser(user);
-        order.setProducts(cart.getProducts());
+        for (Product pro: cart.getProducts()) {
+            order.getProducts().add(pro);
+        }
         saveOrder(order);
         cart.getProducts().clear();
         cartService.saveCart(cart);

@@ -8,7 +8,6 @@ import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.DbOrderService;
 import com.kodilla.ecommercee.service.DbUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,8 +58,8 @@ public class OrderController {
     }
 
     //user
-    @PostMapping(value = "/create_order/user={userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createOrder(@PathVariable Long userId, @RequestBody OrderDto orderDto) throws UserNotFoundException, CartNotFoundException {
+    @PostMapping(value = "/create_order/user={userId}")
+    public ResponseEntity<Void> createOrder(@PathVariable Long userId) throws UserNotFoundException {
         orderService.createNewOrder(userId);
         return ResponseEntity.ok().build();
     }
