@@ -1,12 +1,16 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.enums.AppRoles;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -15,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +38,12 @@ public class User {
     private String keyId;
 
     @NotNull
-    @Column(name = "USER_NAME")
-    private String userName;
+    @Column(name = "USERNAME")
+    private String username;
 
     @NotNull
-    @Column(name = "USER_SURNAME")
-    private String userSurname;
+    @Column(name = "PASSWORD")
+    private String password;
 
     @NotNull
     @Column(name="USER_BLOCKED")
@@ -47,6 +51,17 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Cart cart;
+
+    @Column(name = "ROLE")
+    @Enumerated(value = EnumType.STRING)
+    private AppRoles role;
+
+
+    public User(String username, String password, AppRoles role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public void setUserBlocked(Boolean userBlocked) {
         this.userBlocked = userBlocked;
@@ -56,14 +71,51 @@ public class User {
         this.keyId = keyId;
     }
 
-    public User(Long userId, String userName, String userSurname) {
+    public User(Long userId, String username, String password,AppRoles role) {
         this.userId = userId;
-        this.userName = userName;
-        this.userSurname = userSurname;
+        this.username = username;
+        this.password = password;
+        this.role = AppRoles.USER;
     }
 
-    public User(String userName, String userSurname) {
-        this.userName = userName;
-        this.userSurname = userSurname;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.role = AppRoles.USER;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getGrantedAuthority();
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

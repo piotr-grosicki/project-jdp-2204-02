@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.mapper;
 
+import com.kodilla.ecommercee.Exceptions.InsufficientPermissionsException;
 import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.dto.OrderDto;
@@ -23,7 +24,7 @@ public class OrderMapper {
     @Autowired
     private DbUserService userService;
 
-    public Order mapToOrder(OrderDto orderDto) throws UserNotFoundException {
+    public Order mapToOrder(OrderDto orderDto) throws UserNotFoundException, InsufficientPermissionsException {
         return new Order(
                 orderDto.getId(),
                 userService.getUserWithId(orderDto.getUserId()),

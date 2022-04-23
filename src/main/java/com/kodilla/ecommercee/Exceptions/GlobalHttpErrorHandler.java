@@ -30,7 +30,11 @@ class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(GroupNotFoundException.class)
-    public ResponseEntity<Object> handleGroupNotFoundException(CartNotFoundException exception) {
+    public ResponseEntity<Object> handleGroupNotFoundException(GroupNotFoundException exception) {
         return new ResponseEntity<>("Group with given id doesn't exist", HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(InsufficientPermissionsException.class)
+    public ResponseEntity<Object> handleInsufficientPermissionsException(InsufficientPermissionsException exception){
+        return new ResponseEntity<>("You don't have permission to access this data",HttpStatus.BAD_REQUEST);
     }
 }

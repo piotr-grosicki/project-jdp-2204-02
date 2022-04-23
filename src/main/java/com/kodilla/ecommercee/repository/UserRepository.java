@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserId(Long userId);
     void deleteByUserId(Long userId);
     List<User>findByUserBlocked(Boolean blocked);
+
+    Optional<User> findByUsername(String username);
 }

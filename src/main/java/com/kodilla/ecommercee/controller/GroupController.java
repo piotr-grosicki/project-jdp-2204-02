@@ -8,6 +8,7 @@ import com.kodilla.ecommercee.service.DbGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class GroupController {
 
     //admin
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('admin')")
     public ResponseEntity<Void> createGroup(@RequestBody GroupDto groupDto) {
         Group group = groupMapper.mapToGroup(groupDto);
         service.saveGroup(group);
@@ -43,6 +45,7 @@ public class GroupController {
 
     //admin
     @PutMapping
+    @PreAuthorize("hasAuthority('admin')")
     public ResponseEntity<GroupDto> updateGroup(@RequestBody GroupDto groupDto) {
         Group group = groupMapper.mapToGroup(groupDto);
         Group updatedGroup = service.saveGroup(group);
@@ -51,6 +54,7 @@ public class GroupController {
 
     //root
     @DeleteMapping(value = "{id}")
+    @PreAuthorize("hasAuthority('root')")
     public ResponseEntity<Void> deleteGroup(@PathVariable Long id) {
         service.deleteGroup(id);
         return ResponseEntity.ok().build();
