@@ -450,4 +450,21 @@ DEL /v1/order/{orderId}
 ```
 
 
+# Authors:
+In alphabetical order by our github names:
+```
+authorList.stream()
+            .map(a -> a.getGitName())
+            .sorted()
+            .collect(Collectors.toList());
+            
+sout(authorList);
+```
+Output:
 
+aodzie,
+bernadt,
+Grande17,
+Mc-Beton,
+rydzwr,
+Wis1
