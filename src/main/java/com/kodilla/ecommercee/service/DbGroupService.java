@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.Exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import lombok.AllArgsConstructor;
@@ -17,8 +18,9 @@ public class DbGroupService {
         return repository.findAll();
     }
 
-    public Optional<Group> getGroup(Long id) {
-        return repository.findById(id);
+    public Optional<Group> getGroup(Long id) throws GroupNotFoundException {
+        Optional<Group> result = Optional.ofNullable(repository.findById(id).orElseThrow(GroupNotFoundException::new));
+        return result;
     }
 
     public Group saveGroup(final Group group) {

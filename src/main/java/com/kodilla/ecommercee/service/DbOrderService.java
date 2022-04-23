@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.Exceptions.InsufficientPermissionsException;
 import com.kodilla.ecommercee.Exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.domain.Cart;
@@ -53,7 +54,7 @@ public class DbOrderService {
         return result;
     }
 
-    public void createNewOrder(Long userId) throws UserNotFoundException {
+    public void createNewOrder(Long userId) throws UserNotFoundException, InsufficientPermissionsException {
         User user = userService.getUserWithId(userId);
         Cart cart = cartService.getCartByUser(user);
         Order order = new Order();

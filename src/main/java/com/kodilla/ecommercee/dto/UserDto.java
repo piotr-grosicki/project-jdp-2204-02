@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.dto;
 
+import com.kodilla.ecommercee.enums.AppRoles;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -7,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserDto {
     private Long userId;
-    private String userName;
-    private String userSurname;
-    private Long cartId;
+    private String username;
+    private String password;
+    private AppRoles role;
 }

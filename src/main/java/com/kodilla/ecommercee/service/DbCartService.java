@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.Exceptions.CartNotFoundException;
+import com.kodilla.ecommercee.Exceptions.InsufficientPermissionsException;
 import com.kodilla.ecommercee.Exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.Exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.domain.Cart;
@@ -52,14 +53,14 @@ public class DbCartService {
         return cartRepository.save(cart);
     }
 
-    public Cart addNewProductToCart(Long userId, Long productId) throws ProductNotFoundException, UserNotFoundException {
+    public Cart addNewProductToCart(Long userId, Long productId) throws ProductNotFoundException, UserNotFoundException, InsufficientPermissionsException {
         Cart cart = getCartByUser(userService.getUserWithId(userId));
         Product product = productService.getProductById(productId);
         cart.getProducts().add(product);
         return saveCart(cart);
     }
 
-    public void deleteProduct(Long userId, Long productId) throws UserNotFoundException, ProductNotFoundException {
+    public void deleteProduct(Long userId, Long productId) throws UserNotFoundException, ProductNotFoundException, InsufficientPermissionsException {
         Cart cart = getCartByUser(userService.getUserWithId(userId));
         Product product = cart.getProducts().stream()
                 .filter(p->p.getProductId().equals(productId))

@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.service;
 
+import com.kodilla.ecommercee.Exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.Exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
@@ -46,7 +47,7 @@ public class DbProductService {
         return repository.findByGroup(group);
     }
 
-    public void addProductToGroup(ProductDto productDto, Long groupId) {
+    public void addProductToGroup(ProductDto productDto, Long groupId) throws GroupNotFoundException {
         Optional<Group> group = groupService.getGroup(groupId);
         Product product = productMapper.mapToProduct(productDto);
         product.setGroup(group.get());
