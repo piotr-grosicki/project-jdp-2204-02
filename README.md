@@ -1,18 +1,89 @@
-# SIMPLE STORE PROJECT
+# ::SIMPLE STORE PROJECT::
 
 A group of brave and bold junior programers decided to join forces to create something that they'll remember their times as they started their journey in IT. 
 Keyboards were on fire, sleepless nights were sacrificed, stackoverflow jamed due to countless searches for help and inforamtion to give birth to this exquisite, fine app
 of a simple app store. The time has come to present what we've created.
 
+## Table of contents
+
+1. [Technologies](#technologies-used)
+2. [Features](#features)
+3. [Getting Started](#getting-started)
+4. [Api](#api)
+    - [User Register](#registration-controller)
+    - [User Controller](#user-controller)
+    - [Group Controller](#group-controller)
+    - [Product Controller](#product-controller)
+    - [Cart Controller](#cart-controller)
+    - [Order Controller](#order-controller)
+5. [Contributors](#contributors)
+
+## Technologies Used
+```
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::       (v2.1.18.RELEASE)
+ :: Kodilla project::    (v0.0.1 RELEASE)
+```
+This project is based on Spring Boot in Java 11, secured by Spring Security with JWT Authentication.
+
+* Java 11
+* Spring FrameWork
+* Spring Security
+* JWT
+* Hibernate/Spring Data JPA
+* Gradle
+* JUnit/Jupiter
+* MySQL
+
+## Features
+
+List of features:
+
+User
+- As a User, I can register for a new account.
+- As a registered User, I can view available products, content of the cart and view orders.
+- As a registered User, I can add/delete products to the assigned cart.
+- As a registered User, I can create an order based on users data and the content in the cart.
+- As a registered User, I can shut down or bring up my account.
+
+Admin
+- As an Admin, I can view all registered users.
+- As an Admin, I can create new product groups, add/delete products in those groups.
+- As an Admin, I can view all carts and their contents.
+- As an Admin, I have view on all active/canceled orders.
+- As an Admin, i can cancel an order, on the Users request.
+- As an Admin, I can shut down or bring up an User account.
+
+Root
+- As a Root, I can hard delete Users.
+- As a Root, I can hard delete Orders.
+- As a Root, I cna do whatever the User and Admin can do as well.
+
+
+Stretch Goals:
+
+- Simple Store app, to edit the content of a cart and create an order
+- Have a view of orders
+
 ## Getting started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 See deployment for notes on how to deploy the project on a live system. Just clone or download the files into a folder and it's ready to be used.
 
-## Deployment
-
-Stay with us! This part shall be added shortly!
-
-
+- Clone the repository
+```
+git clone https://github.com/piotr-grosicki/project-jdp-2204-02.git
+```
+- Build the project
+```
+./gradlew build
+```
+- Run the jar file on your local machine or in a docker container
+  - Set the connection properties of your preferred database in the application.properties file
 
 # API
 Here we shall list out all available endpoints with their description, organiazing them by their controller source.
@@ -450,7 +521,7 @@ DEL /v1/order/{orderId}
 ```
 
 
-# Authors:
+# Contributors:
 In alphabetical order by our github names:
 ```
 authorList.stream()
