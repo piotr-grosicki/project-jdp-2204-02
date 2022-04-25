@@ -243,7 +243,22 @@ GET /v1/group
 | `groupId` | `int` | **Required**.  |
 
 ```http
-GET /v1/group/groupId
+GET /v1/group/{groupId}
+```
+
+### PUT
+
+This endpoint provides the abillity to edit an existing group
+
+JSON body:
+
+{
+  "groupDescription": "string",
+  "groupName": "string"
+}
+
+```http
+PUT /v1/group/{groupId}
 ```
 
 ### DELETE
