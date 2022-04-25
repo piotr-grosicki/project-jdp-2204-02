@@ -533,9 +533,9 @@ sout(authorList);
 ```
 Output:
 
-aodzie,
-bernadt,
-Grande17,
-Mc-Beton,
-rydzwr,
-Wis1
+[aodzie](https://github.com/aodzie),
+[bernatd](https://github.com/bernatd),
+[Grande17](https://github.com/Grande17),
+[Mc-Beton](https://github.com/Mc-Beton),
+[rydzwr](https://github.com/rydzwr),
+[Wis1](https://github.com/Wis1)
