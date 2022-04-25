@@ -394,7 +394,7 @@ To add a product to a cart use this endpoint:
 | `productId` | `int` | **Required**.  |
 
 ```http
-GET /v1/carts/{userId}/add/{productId}
+PUT /v1/carts/{userId}/add/{productId}
 ```
 
 ### DELETE
